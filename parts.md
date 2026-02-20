@@ -14,11 +14,11 @@
 
 - Size:
   - Front: 17x8
-  - Back: 17x9
+  - Back: 18x9
   - Brand: [JapanRacing SL03](https://jr-wheels.pl/kategoria/sl03)
 
 ### Tyres
 
 - Size:
-  - Front: 215/40 R17
-  - Back: 245/40 R17
+  - Front: 235/40 R17
+  - Back: 255/35 R18
