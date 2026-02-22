@@ -22,3 +22,7 @@
 - Size:
   - Front: 235/40 R17
   - Back: 255/35 R18
+
+### Battery
+
+> DIY Project comming soon
