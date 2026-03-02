@@ -4,9 +4,9 @@
 
 ### Staring wheel
 
-- Wheel: 
-- Hub: 
-- Quick release: [IRP Quick Release]()
+- Wheel: 330m round alcantare with horn
+- Hub: [NRG Short Hub: SRK-120H](https://getnrg.com/collections/short-hubs-2/products/srk-120h)
+- Quick release: [NRG GEN 2.8 quick release](https://getnrg.com/products/srk-280)
 
 ### Seats
 
