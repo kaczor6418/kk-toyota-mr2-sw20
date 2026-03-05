@@ -10,11 +10,18 @@
 
 ### Seats
 
-[SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
+- Seats: [SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
+- Floor adapter:
+- Side mount: [SPARCO SIDE MOUNT BLACK](https://www.sparco-official.com/en/mounting-frame-22525.html)
 
 ### Safety belts
 
 [SPARCO BELT COMPETITION H-3+2 6PT BL STEEL](https://www.sparco-official.com/en/04818rh1.html)
+
+### Safety Cage
+
+- Full cage: [AST Removable Full Cage V3](https://mtuning.pl/product-pol-131888-Klatka-bezpieczenstwa-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-pelna-klatka-V3.html)
+- Rear cage: [AST Removable Rear Cage V2](https://mtuning.pl/product-pol-131885-Roll-Bar-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-tylna-klatka-V2.html)
 
 ## Wheels
 
@@ -30,11 +37,6 @@
 - Size:
   - Front: 235/40 R17
   - Back: 255/35 R18
-
-## Safety Cage
-
-- Full cage: [AST Removable Full Cage V3](https://mtuning.pl/product-pol-131888-Klatka-bezpieczenstwa-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-pelna-klatka-V3.html)
-- Rear cage: [AST Removable Rear Cage V2](https://mtuning.pl/product-pol-131885-Roll-Bar-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-tylna-klatka-V2.html)
 
 ## Battery
 
