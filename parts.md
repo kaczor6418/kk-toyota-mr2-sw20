@@ -6,11 +6,15 @@
 
 - Wheel: 330m round alcantare with horn
 - Hub: [NRG Short Hub: SRK-120H](https://getnrg.com/collections/short-hubs-2/products/srk-120h)
-- Quick release: [NRG GEN 2.8 quick release](https://getnrg.com/products/srk-280)
+- Quick release: [NRG GEN 2.2 quick release](https://getnrg.com/products/srk-220?variant=37067145740438)
 
 ### Seats
 
+[SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
+
 ### Safety belts
+
+[SPARCO BELT COMPETITION H-3+2 6PT BL STEEL](https://www.sparco-official.com/en/04818rh1.html)
 
 ## Wheels
 
