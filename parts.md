@@ -2,9 +2,9 @@
 
 ## Cocpit
 
-### Staring wheel
+### Steering wheel
 
-- Wheel: 330m round alcantare with horn
+- Wheel: [Runsco 330mm Flat Steering Wheel](https://www.runsco.com/collections/steering-wheel/products/runsco-330mm-flat-steering-wheel)
 - Hub: [NRG Short Hub: SRK-120H](https://getnrg.com/collections/short-hubs-2/products/srk-120h)
 - Quick release: [NRG GEN 2.2 quick release](https://getnrg.com/products/srk-220?variant=37067145740438)
 
@@ -20,8 +20,7 @@
 
 ### Safety Cage
 
-- Full cage: [AST Removable Full Cage V3](https://mtuning.pl/product-pol-131888-Klatka-bezpieczenstwa-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-pelna-klatka-V3.html)
-- Rear cage: [AST Removable Rear Cage V2](https://mtuning.pl/product-pol-131885-Roll-Bar-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-tylna-klatka-V2.html)
+[AST Removable Rear Cage V2](https://mtuning.pl/product-pol-131885-Roll-Bar-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-tylna-klatka-V2.html)
 
 ## Wheels
 
