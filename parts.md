@@ -11,7 +11,7 @@
 ### Seats
 
 - Seats: [SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
-- Floor adapter:
+- Floor adapter: [SPARCO SEAT BASE - 600 SERIES](https://www.sparcousa.com/seat-base-600-series)
 - Side mount: [SPARCO SIDE MOUNT BLACK](https://www.sparco-official.com/en/mounting-frame-22525.html)
 
 ### Safety belts
@@ -20,7 +20,22 @@
 
 ### Safety Cage
 
-[AST Removable Rear Cage V2](https://mtuning.pl/product-pol-131885-Roll-Bar-TOYOTA-MR-2-W20-2-drzwiowa-Roadster-demontowalna-tylna-klatka-V2.html)
+[AST Removable Rear Cage V2](https://astrollcages.com/tienda/en/inicio/26000-TOYOTAMR-22-doorsRoadsterREMOVABLEREARCAGEV2.htmll)
+
+## Suspension
+
+### Coilovers
+
+[KW V3 (35256004)](https://www.kw-suspensions.pl/kw-variant-3/)
+
+### Struts
+
+- Front Strut Tower Brace: [Ultra Racing URTW4-942]()
+- Front Lower Arm Bar: [Ultra Racing LA4-315]()
+- Fender Braces: [Ultra Racing URFD3-043P]()
+- Side Floor Braces: [Ultra Racing SD6-456]()
+- Rear Member Brace: [Ultra Racing RL4-314]()
+- Rear Lower Arm Bar: [Ultra Racing LA2-316]()
 
 ## Wheels
 
