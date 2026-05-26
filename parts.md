@@ -12,7 +12,7 @@
 
 - Seats: [SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
 - Floor adapter: [SPARCO SEAT BASE - 600 SERIES](https://www.sparcousa.com/seat-base-600-series)
-- Side mount: [SPARCO SIDE MOUNT BLACK](https://www.sparco-official.com/en/mounting-frame-22525.html)
+- Side mount: [IRP PRO V2](./parts-manuals/irp-pro-v2-side-mount.pdf)
 
 ### Safety belts
 
@@ -24,9 +24,17 @@
 
 ## Suspension
 
+### Geometry
+
+- [Rear Double A-Arm Conversion](https://wilhelmraceworks.com/shop/rear-double-a-arm-conversion-p594211655)
+- [Suspension Geometry Kit](https://wilhelmraceworks.com/shop/suspension-geometry-kit-p571929474)
+- [Aluminum Front Knuckles](https://wilhelmraceworks.com/shop/aluminum-front-knuckles-p572321954)
+- [Aluminum Rear Knuckles](https://wilhelmraceworks.com/shop/aluminum-rear-knuckles-p572332082)
+
 ### Coilovers
 
 [KW V3 (35256004)](https://www.kw-suspensions.pl/kw-variant-3/)
+>Thes best will be to ask for the competition version
 
 ### Struts
 
@@ -34,7 +42,7 @@
 - Front Lower Arm Bar: [Ultra Racing LA4-315]()
 - Fender Braces: [Ultra Racing URFD3-043P]()
 - Side Floor Braces: [Ultra Racing SD6-456]()
-- Rear Member Brace: [Ultra Racing RL4-314]()
+- Rear Lower Brace: [Ultra Racing RL4-314]()
 - Rear Lower Arm Bar: [Ultra Racing LA2-316]()
 
 ## Wheels
@@ -53,6 +61,10 @@
   - Back: 255/35 R18
 
 ## Engine mods
+
+### Transmition
+
+[Toyota E153](./parts-manuals/e153-manual.pdf)
 
 ### Intercooler
 
