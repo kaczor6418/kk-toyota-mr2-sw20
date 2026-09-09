@@ -10,9 +10,29 @@
 
 ### Seats
 
-- Seats: [SPARCO SEAT REV QRT](https://www.sparco-official.com/en/rev-qrt-008014rnr.html)
-- Floor adapter: [SPARCO SEAT BASE - 600 SERIES](https://www.sparcousa.com/seat-base-600-series)
+- Seats: [SPARCO SEAT EVO L QRT X](https://www.sparco-official.com/en/evo-l-qrt-x-008013xnr.html)
 - Side mount: [IRP PRO V2](./parts-manuals/irp-pro-v2-side-mount.pdf)
+- Floor adapter: Custom seat floor rails
+
+#### Seat mounting
+
+>Screw -> Spring washer DIN 127 -> Fender Washer DIN 9021 -> Side mount -> Nylon washer -> Seat shell
+
+- **4 x Allen screw M8**
+  - Diameter: M8
+  - Thread pitch: 1.25 mm
+  - Thread length: 25 mm ()
+  - Hardness class: 8.8 - 12.9 (blackened)
+- **4 x Enlarged/body washer M8 (DIN 9021)**
+  - Inner diameter: 8.4 mm
+  - Outer diameter: 24/25 mm
+  - Thickness: 2mm
+- **4 x Spring washer M8 (DIN 127)**
+  - Inner diameter: 8.1 mm
+- **4 x M8 nylon/plastic washer**
+  - Inner diameter: 8.5 mm
+  - Thickness: 2-3 mm
+- **1 x Medium Strength Threadlocker**
 
 ### Safety belts
 
@@ -64,7 +84,9 @@
 
 ### Transmition
 
-[Toyota E153](./parts-manuals/e153-manual.pdf)
+- [Toyota E153](./parts-manuals/e153-manual.pdf)
+- [SQS E153 Dog Box Gear set](https://www.sqsracing.com/produkt/422:528:toyota-celica-gt4-dog-box-racing-gearbox-mr2-turbo-e154-e51)
+- [Quaife ATB Helical LSD Differential]()
 
 ### Intercooler
 
