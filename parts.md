@@ -90,6 +90,10 @@
 
 ### Intercooler
 
+## Head unit
+
+[Custom project](./head-unit/head-unit.md) of radio head unit with telemtry and audio system.
+
 ## Battery
 
 > DIY Project comming soon
