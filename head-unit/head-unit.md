@@ -1,7 +1,7 @@
 # Head Unit
 
 I have decided to build my own head unit as I want good audio and I also want to collect telmetry while I am driving a car. Notice this project assume you will be collecting telemtry from OB2 compatilbe unit.
-This project will also give possablity to use android auto and hands-free system for pickingup callas and making calls
+This project will also give possablity to use android auto and hands-free system for pickingup callas and making calls.
 
 ## Parts
 
@@ -31,10 +31,10 @@ This project will also give possablity to use android auto and hands-free system
 ### Power section Amplifier
 
 1. M8 Ring Terminal 16mm²
-2. Fuse holder Mini-ANL 16mm² + Fuse 50A
+2. Fuse holder Mini-ANL 16mm² + Fuse 80A
 3. Wire H01N2-D 16mm² (3m)
 4. Wire OFC 2x2.5mm² to connect subwoffer (2m)
-5. Wire FLRY-B 1mm²
+5. Wire FLRY-B 1mm² (1m)
 
 ### Power section Raspberry Pi
 
@@ -61,6 +61,61 @@ This project will also give possablity to use android auto and hands-free system
 ## How to connect Amplifier
 
 ### Instruction step by step
+
+#### **Step 1: Amplifier Power & Control Terminals**
+
+All power cables must be of appropriate gauge to ensure stable operation and safety inside the vehicle.
+
+- **`+12V (BATT)`**: Run a heavy-gauge power wire directly from the car battery. **You must install a Mini ANL fuse (60A–80A)** on this power wire within a maximum distance of 30 cm (12 inches) from the battery terminal.
+- **`GND` (Ground)**: Connect a short, heavy-gauge ground wire to a clean, unpainted, solid metal point on the car chassis.
+- **`REM` (Remote / Turn-On Signal)**: Connect the turn-on control wire (e.g., to the vehicle's ACC / ignition switch line or system turn-on control output).
+
+---
+
+#### **Step 2: Audio Signal Connection (USB DAC U-CONTROL UCA202 $\rightarrow$ Amplifier)**
+
+Use a single high-quality, dual-shielded RCA (Cinch) cable to connect the audio source to the amplifier:
+
+- **DAC Output**: Connect the RCA cable to the `LINE OUT` jacks (labeled **L** and **R**) on the **Behringer U-CONTROL UCA202** audio interface.
+- **Amplifier Input**: Plug the RCA connectors directly into the **`INPUT CH A` (`L` and `R`)** jacks on the Pioneer amplifier panel.
+- **`INPUT CH B` Jacks (Left Unused)**: The UCA202 interface only provides one stereo output pair. The audio signal is passed internally to Channel B inside the amplifier by setting the `INPUT SELECT: 2CH` switch in Step 3.
+- **`RCA OUTPUT` Jacks (Left Unused)**: These pass-through outputs are only used to chain signal to a second external amplifier, which is not required in this setup.
+
+---
+
+#### **Step 3: Switch & Crossover Configuration**
+
+Set the switches on the amplifier body according to the following specifications for a front component set + subwoofer system:
+
+- **`INPUT SELECT`**: Set to the **`2CH`** position (this is crucial as it internally splits the signal from `CH A` input to all 4 output channels, eliminating the need for external RCA Y-splitters).
+- **`CHANNEL A` (Front Speakers)**: Set the crossover switch to **`HPF`** (High-Pass Filter), and set the frequency dial (`FREQ`) to approximately **80 Hz** (protects the front door speakers from reproducing low bass frequencies).
+- **`CHANNEL B` (Subwoofer)**: Set the crossover switch to **`LPF`** (Low-Pass Filter), and set the frequency dial (`FREQ`) to approximately **80 Hz** (ensures only low frequencies are sent to the subwoofer).
+
+---
+
+#### **Step 4: Connecting Front Speakers – Section A (Stereo)**
+
+The front component set (Audio System Radion R165 EVO3) is powered in standard stereo mode via Channel A:
+
+- **Left Channel**: Connect the speaker wires from the left crossover network to the **`CH A (L+)`** and **`CH A (L-)`** terminals on the amplifier.
+- **Right Channel**: Connect the speaker wires from the right crossover network to the **`CH A (R+)`** and **`CH A (R-)`** terminals on the amplifier.
+
+---
+
+#### **Step 5: Connecting & Bridging the Subwoofer – Section B (Bridged)**
+
+The dual-voice-coil (DVC) subwoofer (Audio System R08 EVO) requires a series voice-coil connection and bridged amplifier wiring to present a safe $4\,\Omega$ load to the amplifier:
+
+1. **Subwoofer Voice Coil Wiring (Series Connection):**
+
+   - Connect a short jumper wire between **Coil 1 (-)** terminal and **Coil 2 (+)** terminal directly on the subwoofer terminal block.
+
+2. **Amplifier-to-Subwoofer Wiring:**
+
+   - Connect the wire from the **`CH B (L+)`** amplifier terminal to the open **Coil 1 (+)** terminal on the subwoofer.
+   - Connect the wire from the **`CH B (R-)`** amplifier terminal to the open **Coil 2 (-)** terminal on the subwoofer.
+
+3. **`CH B (L-)` and `CH B (R+)` Terminals (Left Unused)**: In bridged mode, the amplifier draws power exclusively from the outer terminals (`L+` and `R-`), leaving the inner Channel B terminals unconnected.
 
 ### High level schema (Mermaid)
 
@@ -158,3 +213,7 @@ graph TD
                                                 • CH A (R+ / R-) ──► Front Right Speaker                            • CH B (R-)  ──► Subwoofer (-)
                                                                                                                         (CH B: L- and R+ left open)
 ```
+
+### High level schema (Pucture)
+
+![amplifier connection](../pictures/amplifier-connection.png)
