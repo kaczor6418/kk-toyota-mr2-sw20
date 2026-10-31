@@ -224,6 +224,68 @@ graph TD
 
 ### High level schema (Mermaid)
 
+```mermaid
+graph TD
+    %% Main Power Section
+    Batt["Car Battery"] --> Isolator["Main Battery Isolator Switch"]
+    Isolator -->|1.0-1.5 mm² Wire| Fuse["5A Fuse"]
+    
+    %% Compact relay group as a single component
+    subgraph Relay ["JD 1914 Automotive Relay"]
+        Pin30["Pin 30: 12V Power Input"]
+        Pin86["Pin 86: IGN / Ignition Control"]
+        Pin85["Pin 85: Coil Ground (GND)"]
+        Pin87["Pin 87: Switched 12V Power Output"]
+        
+        Pin30 -.->|"Internal working contact"| Pin87
+    end
+
+    Fuse --> Pin30
+    Ignition["Car Ignition Switch (IGN)"] --> Pin86
+    CarBody["Car Body / Ground Point"] --> Pin85
+    
+    Pin87 -->|"When contacts close"| Converter["DC-DC Converter 12V -> 5V"]
+    CarBody -.->|"Input Ground"| Converter
+    
+    Converter -->|"USB-C Plug + Thermal Glue"| UPS["Geekworm UPS Module + 18650 Cells"]
+    UPS --> RPi["Raspberry Pi 5"]
+    
+    %% RPi 5 HATs and Peripherals Section
+    RPi --> RTC["RTC Battery"]
+    RPi --> NVMe["NVMe HAT + SSD"]
+    RPi --> Can["CAN Bus HAT"]
+    
+    %% Display Section (Waveshare 11199)
+    RPi --> HDMI["Micro-HDMI Port"]
+    HDMI -->|"HDMI Cable (Video)"| Screen["Waveshare 7 inch IPS LCD (11199)"]
+    RPi --> USBDisp["USB-A Port (Touch)"]
+    USBDisp -->|"USB Cable (Touch/Data)"| Screen
+    
+    %% Audio Section (Dual-Card)
+    RPi --> USB1["USB-A Port 1"]
+    RPi --> USB2["USB-A Port 2"]
+    
+    USB1 --> Unitek["Unitek Y-247A Sound Card"]
+    Unitek --> Mic["Amphenol TRS 3.5mm Microphone"]
+    
+    USB2 --> Behringer["Behringer UCA202 Audio Interface"]
+    Behringer -->|"RCA / Cinch Cables"| Amp["Car Audio Amplifier"]
+    Amp --> Speakers["Car Speakers"]
+
+    %% Color Styling
+    classDef power fill:#ffcccc,stroke:#333,stroke-width:2px;
+    classDef relayBox fill:#fff3cd,stroke:#333,stroke-width:2px;
+    classDef core fill:#d4edda,stroke:#333,stroke-width:2px;
+    classDef audio fill:#d1ecf1,stroke:#333,stroke-width:2px;
+    classDef display fill:#e2d9f3,stroke:#333,stroke-width:2px;
+    
+    class Batt,Isolator,Fuse,Converter power;
+    class Pin30,Pin86,Pin85,Pin87 relayBox;
+    class UPS,RPi,NVMe,Can,RTC core;
+    class Unitek,Behringer,Mic,Amp audio;
+    class Screen display;
+```
+
 ### High level schema (Plain)
 
 ```
