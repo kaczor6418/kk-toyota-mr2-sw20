@@ -57,9 +57,220 @@ This project will also give possablity to use android auto and hands-free system
 2. ISO adapter connector for Toyota MR2
 3. [OPTIONAL] USB - CAN adapter TJA1051T/3 (needed for testing CAN hat signals)
 
+## Whole system
+
+### Meramid schema
+
+```mermaid
+
+flowchart TD
+
+    %% ==========================================
+    %% 1. CAR BATTERY AND POWER DISTRIBUTION
+    %% ==========================================
+
+    subgraph BATTERY["1. CAR BATTERY AND POWER DISTRIBUTION"]
+        BAT["Car Battery 12V"]
+        DIST(("12V Power Distribution"))
+        CHASSIS["Car Chassis / Ground Point"]
+        IGN["Ignition Switch ACC / IGN"]
+
+        BAT --> DIST
+    end
+
+    %% ==========================================
+    %% 2. DEDICATED AMPLIFIER POWER SUPPLY
+    %% ==========================================
+
+    subgraph AMP_POWER["2. AMPLIFIER POWER SUPPLY — SEPARATE CIRCUIT"]
+        AFUSE["Mini-ANL Fuse 60–80A<br/>Maximum 30 cm from battery"]
+        AMP_BATT["Pioneer GM-D8704<br/>BATT +12V Terminal"]
+        AMP_GND["Pioneer GM-D8704<br/>GND Terminal"]
+        AMP_REM["Pioneer GM-D8704<br/>REM Terminal"]
+
+        DIST -->|"16 mm² H01N2-D Power Cable"| AFUSE
+        AFUSE --> AMP_BATT
+
+        CHASSIS -->|"16 mm² Ground Cable"| AMP_GND
+        IGN -->|"ACC / IGN Signal"| AMP_REM
+    end
+
+    %% ==========================================
+    %% 3. RASPBERRY PI POWER SUPPLY
+    %% ==========================================
+
+    subgraph PI_POWER["3. RASPBERRY PI 5 POWER SUPPLY"]
+        ISOLATOR["Main Battery Isolator Switch"]
+        FUSE5["5A Fuse"]
+        RELAY30["JD 1914 — Pin 30<br/>12V Power Input"]
+        RELAY87["JD 1914 — Pin 87<br/>Switched 12V Output"]
+        RELAY86["JD 1914 — Pin 86<br/>IGN / Ignition Control"]
+        RELAY85["JD 1914 — Pin 85<br/>Coil Ground"]
+        CONVERTER["DC-DC Converter<br/>12V / 24V → 5V / 5A"]
+        USB_C["USB-C Male Connector"]
+        UPS["Geekworm X1200 UPS HAT<br/>+ 18650 Battery Cells"]
+        PI["Raspberry Pi 5<br/>8GB RAM"]
+
+        DIST -->|"1.0–1.5 mm² Wire"| ISOLATOR
+        ISOLATOR --> FUSE5
+        FUSE5 --> RELAY30
+
+        RELAY30 -.->|"Internal Working Contact"| RELAY87
+
+        IGN --> RELAY86
+        CHASSIS --> RELAY85
+        RELAY87 --> CONVERTER
+        CHASSIS -->|"DC-DC Input Ground"| CONVERTER
+
+        CONVERTER -->|"5V / 5A Output"| USB_C
+        USB_C --> UPS
+        UPS -->|"Power via Pogo Pins"| PI
+    end
+
+    %% ==========================================
+    %% 4. RASPBERRY PI MODULES
+    %% ==========================================
+
+    subgraph PI_MODULES["4. RASPBERRY PI 5 MODULES"]
+        RTC["RTC JST Battery"]
+        COOLER["Raspberry Pi Active Cooler"]
+        PCIE["Waveshare PCIe to M.2 Adapter<br/>26583"]
+        SSD["WD SN530 NVMe SSD<br/>512GB M.2 2230"]
+        CAN["Waveshare 2-CH CAN FD HAT<br/>17075"]
+
+        PI --> RTC
+        PI --> COOLER
+        PI --> PCIE
+        PCIE --> SSD
+        PI --> CAN
+    end
+
+    %% ==========================================
+    %% 5. DISPLAY
+    %% ==========================================
+
+    subgraph DISPLAY["5. DISPLAY"]
+        HDMI["Micro-HDMI Port"]
+        USB_TOUCH["USB-A Port<br/>Touch / Data"]
+        SCREEN["Waveshare 7-inch IPS LCD<br/>11199"]
+
+        PI --> HDMI
+        HDMI -->|"HDMI Cable"| SCREEN
+
+        PI --> USB_TOUCH
+        USB_TOUCH -->|"Touch Data"| SCREEN
+    end
+
+    %% ==========================================
+    %% 6. AUDIO SOURCES AND MICROPHONE
+    %% ==========================================
+
+    subgraph AUDIO_SOURCE["6. AUDIO SOURCES AND MICROPHONE"]
+        UGREEN["UGREEN CM477<br/>USB-A to 3.5mm Jack Adapter"]
+        MIC["3.5mm TRS Microphone<br/>or PUI AOM-5024L-HD-R"]
+        BEHRINGER["Behringer U-CONTROL UCA202"]
+        RCA["RCA / Cinch Cables<br/>Left + Right Channels"]
+
+        PI -->|"USB Audio"| UGREEN
+        UGREEN --> MIC
+
+        PI -->|"USB Audio"| BEHRINGER
+        BEHRINGER -->|"LINE OUT L / R"| RCA
+    end
+
+    %% ==========================================
+    %% 7. PIONEER AMPLIFIER AND CONFIGURATION
+    %% ==========================================
+
+    subgraph AMPLIFIER["7. PIONEER GM-D8704 AMPLIFIER"]
+        AMP["Pioneer GM-D8704<br/>4-Channel Amplifier"]
+        INPUT["INPUT CH A — L / R"]
+        SELECT["INPUT SELECT: 2CH"]
+        CH_A["CHANNEL A<br/>HPF @ 80Hz"]
+        CH_B["CHANNEL B<br/>LPF @ 80Hz"]
+        TERM_A_L["CH A: L+ / L-"]
+        TERM_A_R["CH A: R+ / R-"]
+        TERM_B_LPLUS["CH B: L+ (POSITIVE)"]
+        TERM_B_RMINUS["CH B: R- (NEGATIVE)"]
+        UNUSED["CH B: L- and R+<br/>Not Used"]
+
+        RCA --> INPUT
+        INPUT --> AMP
+        AMP --> SELECT
+        SELECT --> CH_A
+        SELECT --> CH_B
+
+        CH_A --> TERM_A_L
+        CH_A --> TERM_A_R
+
+        CH_B --> TERM_B_LPLUS
+        CH_B --> TERM_B_RMINUS
+        CH_B --> UNUSED
+
+        AMP_BATT --> AMP
+        AMP_GND --> AMP
+        AMP_REM --> AMP
+    end
+
+    %% ==========================================
+    %% 8. FRONT SPEAKERS
+    %% ==========================================
+
+    subgraph FRONT["8. FRONT SPEAKERS"]
+        FRONT_L["Front Left Speaker<br/>Audio System R165 EVO3"]
+        FRONT_R["Front Right Speaker<br/>Audio System R165 EVO3"]
+
+        TERM_A_L --> FRONT_L
+        TERM_A_R --> FRONT_R
+    end
+
+    %% ==========================================
+    %% 9. SUBWOOFER — SERIES CONNECTED VOICE COILS
+    %% ==========================================
+
+    subgraph SUB["9. SUBWOOFER — SERIES VOICE COIL CONNECTION"]
+        SUB_C1_P["Voice Coil 1: (+)"]
+        SUB_C1_N["Voice Coil 1: (-)"]
+        SUB_C2_P["Voice Coil 2: (+)"]
+        SUB_C2_N["Voice Coil 2: (-)"]
+        SUBWOOFER["Audio System R08 EVO<br/>Dual Voice Coil Subwoofer"]
+
+        TERM_B_LPLUS --> SUB_C1_P
+        SUB_C1_N -->|"Series Jumper"| SUB_C2_P
+        TERM_B_RMINUS --> SUB_C2_N
+
+        SUB_C1_P --- SUBWOOFER
+        SUB_C1_N --- SUBWOOFER
+        SUB_C2_P --- SUBWOOFER
+        SUB_C2_N --- SUBWOOFER
+    end
+
+    %% ==========================================
+    %% COLOR STYLING
+    %% ==========================================
+
+    classDef power fill:#ffcccc,stroke:#b30000,stroke-width:2px,color:#222;
+    classDef relay fill:#fff0c2,stroke:#b87900,stroke-width:2px,color:#222;
+    classDef core fill:#d7f2d4,stroke:#238636,stroke-width:2px,color:#222;
+    classDef display fill:#e9defa,stroke:#7040a0,stroke-width:2px,color:#222;
+    classDef audio fill:#d9efff,stroke:#1674b8,stroke-width:2px,color:#222;
+
+    class BAT,DIST,AFUSE,AMP_BATT,AMP_GND,AMP_REM power;
+    class ISOLATOR,FUSE5,RELAY30,RELAY87,RELAY86,RELAY85,CONVERTER,USB_C relay;
+    class UPS,PI,RTC,COOLER,PCIE,SSD,CAN core;
+    class HDMI,USB_TOUCH,SCREEN display;
+    class UGREEN,MIC,BEHRINGER,RCA,AMP,INPUT,SELECT,CH_A,CH_B,TERM_A_L,TERM_A_R,TERM_B_LPLUS,TERM_B_RMINUS,UNUSED,FRONT_L,FRONT_R,SUB_C1_P,SUB_C1_N,SUB_C2_P,SUB_C2_N,SUBWOOFER audio;
+
+```
+
+### Picture
+
+![whole system connection connection](../pictures/rpi-amplifier-whole-connection.png)
+>This picture was generated by AI.
+
 ## How to connect Amplifier
 
-### Instruction step by step
+### Amplifier - Instruction step by step
 
 #### **Step 1: Amplifier Power & Control Terminals**
 
@@ -116,7 +327,7 @@ The dual-voice-coil (DVC) subwoofer (Audio System R08 EVO) requires a series voi
 
 3. **`CH B (L-)` and `CH B (R+)` Terminals (Left Unused)**: In bridged mode, the amplifier draws power exclusively from the outer terminals (`L+` and `R-`), leaving the inner Channel B terminals unconnected.
 
-### High level schema (Mermaid)
+### Amplifier - High level schema (Mermaid)
 
 ```mermaid
 graph TD
@@ -174,7 +385,7 @@ graph TD
     TermB_RMinus --> Sub_C2_Minus
 ```
 
-### High level schema (Plain)
+### Amplifier - High level schema (Plain)
 
 ```plaintext
 [ CAR BATTERY 12V ]
@@ -213,16 +424,66 @@ graph TD
                                                                                                                         (CH B: L- and R+ left open)
 ```
 
-### High level schema (Picture)
+### Amplifier -  High level schema (Picture)
 
 ![amplifier connection](../pictures/amplifier-connection.png)
->This picture was generated by AI 
+>This picture was generated by AI.
 
 ## How to connect Computer
 
-### Instruction step by step
+### RPI5 - Instruction step by step
 
-### High level schema (Mermaid)
+#### **Step 1: Main Power Section Setup (12V)**
+
+1. **Main Battery Isolator Switch:** Connect to the positive terminal of the 12V car battery. Use a wire with a cross-section of $1.0\text{--}1.5\text{ mm}^2$.
+2. **Circuit Protection:** Run the output from the isolator switch directly to the **5A fuse** holder.
+3. **Connecting to the JD 1914 Automotive Relay:**
+   - Crimp a terminal onto the output wire from the 5A fuse and connect it to **Pin 30** of the relay (12V power input).
+   - Connect the **IGN (Ignition)** signal wire from the ignition switch to **Pin 86** (relay coil control).
+   - Connect **Pin 85** to a factory chassis ground point.
+   - Fully isolate **Pin 87a** using heat-shrink tubing to prevent short circuits.
+   - Run the switched 12V output wire from **Pin 87**.
+
+---
+
+#### **Step 2: Voltage Conversion and UPS Wiring**
+
+1. **DC-DC Step-Down Converter (12V $\rightarrow$ 5V):**
+    - Connect the wire from relay **Pin 87** to the positive input ($IN+$) of the converter.
+    - Connect the input ground ($IN-$) to the factory chassis ground point.
+2. **Geekworm UPS Module:**
+    - Connect the 5V output from the DC-DC converter to the power input port of the Geekworm UPS module via a USB-C cable (secure the connector with thermal glue to resist vibration).
+    - Insert the 18650 cells into the UPS battery holder.
+
+---
+
+#### **Step 3: Installing HATs and Modules on the Raspberry Pi 5**
+
+1. **RTC Battery Backup:** Plug the RTC battery (CR1220) into the dedicated RTC connector on the Raspberry Pi 5 board.
+2. **NVMe SSD HAT:** Install the M.2 2230 SSD onto the NVMe HAT, then connect the HAT to the Raspberry Pi 5 PCIe port using the FFC ribbon cable.
+3. **CAN Bus HAT:** Mount the CAN Bus HAT onto the 40-pin GPIO header of the Raspberry Pi 5.
+4. **Pi Power Supply:** Connect the Geekworm UPS module to the Raspberry Pi 5 stack (via GPIO power pins or the dedicated pogo-pin/USB-C connection).
+
+---
+
+#### **Step 4: Touchscreen Display Setup (Waveshare 7" IPS)**
+
+1. **Video Signal:** Connect the micro-HDMI port on the Raspberry Pi 5 to the HDMI input port on the Waveshare screen using a micro-HDMI $\rightarrow$ HDMI cable.
+2. **Touch & Data:** Connect one of the USB-A ports on the Raspberry Pi 5 to the USB (Touch/Data) port on the screen using a USB cable.
+
+---
+
+#### **Step 5: Independent Audio Setup (USB Dual-Card)**
+
+1. **Unitek Y-247A Sound Card (Audio Input / Microphone):**
+    - Plug the Unitek Y-247A sound card directly into a free USB-A port on the Raspberry Pi 5.
+    - Connect the Amphenol TRS 3.5mm microphone to the 3.5mm mic jack on the Unitek card.
+2. **Behringer UCA202 Audio Interface (Audio Output / DAC):**
+    - Plug the Behringer UCA202 interface directly into another free USB-A port on the Raspberry Pi 5.
+    - Connect the RCA (Cinch) outputs from the Behringer via shielded RCA cables to the input terminals of the car audio amplifier.
+3. **Speakers:** Connect the speaker output terminals from the amplifier to the car speakers.
+
+### RPI5 - High level schema (Mermaid)
 
 ```mermaid
 graph TD
@@ -286,7 +547,7 @@ graph TD
     class Screen display;
 ```
 
-### High level schema (Plain)
+### RPI5 - High level schema (Plain)
 
 ```
 [CAR BATTERY]
@@ -322,4 +583,7 @@ graph TD
       └──> [RELAY PIN 85 (GND)][cite: 1, 2] ──> [CAR BODY]
 ```
 
-### High level schema (Pucture)
+### RPI5 - High level schema (Picture)
+
+![rpi5 connection](../pictures/rpi-5-connection.png)
+>This picture was generated by AI.
