@@ -3,6 +3,29 @@
 I have decided to build my own head unit as I want good audio and I also want to collect telmetry while I am driving a car. Notice this project assume you will be collecting telemtry from OB2 compatilbe unit.
 This project will also give possablity to use android auto and hands-free system for pickingup callas and making calls.
 
+## Contents
+
+1. [Parts](#parts)
+    - [Computer](#computer)
+    - [Audio](#audio)
+    - [Power section Amplifier](#power-section-amplifier)
+    - [Power section Raspberry Pi](#power-section-raspberry-pi)
+    - [Software](#software)
+    - [Additional parts](#additional-parts)
+2. [Whole system high level schema](#whole-system-high-level-schema)
+    - [Meramid schema](#meramid-schema)
+    - [Picture](#picture)
+3. [How to connect Amplifier](#how-to-connect-amplifier)
+    - [Amplifier - Instruction step by step](#amplifier---instruction-step-by-step)
+    - [Amplifier - High level schema (Mermaid)](#amplifier---high-level-schema-mermaid)
+    - [Amplifier - High level schema (Plain)](#amplifier---high-level-schema-plain)
+    - [Amplifier - High level schema (Picture)](#amplifier----high-level-schema-picture)
+4. [How to connect Computer](#how-to-connect-computer)
+    - [RPI5 - Instruction step by step](#rpi5---instruction-step-by-step)
+    - [RPI5 - High level schema (Mermaid)](#rpi5---high-level-schema-mermaid)
+    - [RPI5 - High level schema (Plain)](#rpi5---high-level-schema-plain)
+    - [RPI5 - High level schema (Picture)](#rpi5---high-level-schema-picture)
+
 ## Parts
 
 ### Computer
@@ -57,7 +80,7 @@ This project will also give possablity to use android auto and hands-free system
 2. ISO adapter connector for Toyota MR2
 3. [OPTIONAL] USB - CAN adapter TJA1051T/3 (needed for testing CAN hat signals)
 
-## Whole system
+## Whole system high level schema
 
 ### Meramid schema
 
